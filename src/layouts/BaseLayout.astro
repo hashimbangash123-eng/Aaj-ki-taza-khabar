@@ -1,0 +1,145 @@
+---
+const { title = "Aaj Ki Taza Khabar", lang = "en", dir = "ltr" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang} dir={dir} class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | Aaj Ki Taza Khabar</title>
+  <meta name="description" content="Aaj Ki Taza Khabar - Latest verified news from Pakistan and around the world in English and Urdu." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-color: #f8fafc;
+      --accent-red: #ef4444;
+      --border-color: #334155;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    html[dir="rtl"] body {
+      font-family: 'Noto Nastaliq Urdu', serif;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    header {
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      background: #020617;
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--accent-red);
+      text-decoration: none;
+    }
+    .lang-btn {
+      background: var(--accent-red);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .ticker {
+      background: #1e1b4b;
+      color: #a5f3fc;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .ticker-badge {
+      background: var(--accent-red);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.75rem;
+    }
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .nav-links a:hover {
+      color: #ef4444;
+    }
+  </style>
+</head>
+<body>
+  <div class="ticker">
+    <span class="ticker-badge">{lang === 'ur' ? 'اہم خبریں' : 'BREAKING'}</span>
+    <span>{lang === 'ur' ? 'تصدیق شدہ خبریں - پاکستان اور دنیا' : 'Verified, independent bilingual reporting from Pakistan & world.'}</span>
+  </div>
+  
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <a href={`/${lang}/`} class="logo">
+          Aaj Ki Taza Khabar
+        </a>
+        <nav>
+          {lang === 'en' ? (
+            <a href="/ur/" class="lang-btn">اردو میں پڑھیں</a>
+          ) : (
+            <a href="/en/" class="lang-btn">English</a>
+          )}
+        </nav>
+      </div>
+      <div class="nav-links">
+        <a href={`/${lang}/`}>{lang === 'ur' ? 'صفحہ اول' : 'Home'}</a>
+        <a href={`/${lang}/category/pakistan`}>{lang === 'ur' ? 'پاکستان' : 'Pakistan'}</a>
+        <a href={`/${lang}/category/world`}>{lang === 'ur' ? 'عالمی' : 'World'}</a>
+        <a href={`/${lang}/category/sports`}>{lang === 'ur' ? 'کھیل' : 'Sports'}</a>
+        <a href={`/${lang}/category/politics`}>{lang === 'ur' ? 'سیاست' : 'Politics'}</a>
+        <a href={`/${lang}/category/technology`}>{lang === 'ur' ? 'ٹیکنالوجی' : 'Technology'}</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <slot />
+  </main>
+
+  <footer style="border-top: 1px solid var(--border-color); padding: 2rem 0; text-align: center; color: #94a3b8; font-size: 0.875rem;">
+    <div class="container">
+      <p>© 2026 Aaj Ki Taza Khabar. Written with AI assistance from verified sources and reviewed against them.</p>
+      <p style="margin-top: 0.5rem;">
+        <a href={`/${lang}/about`} style="color: #cbd5e1; margin: 0 0.5rem;">About</a> |
+        <a href={`/${lang}/editorial-policy`} style="color: #cbd5e1; margin: 0 0.5rem;">Editorial Policy</a> |
+        <a href={`/${lang}/privacy-policy`} style="color: #cbd5e1; margin: 0 0.5rem;">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
